@@ -128,6 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AlgorithmsAndDataStructures.cpp" />
+    <ClCompile Include="Iterator.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="reverse_iteratorr.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Iterator.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="reverse_iteratorr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
