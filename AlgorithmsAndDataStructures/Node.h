@@ -19,36 +19,33 @@
 #include <list>
 #include <cstdarg>
 
-#include "List.h"
-#include "reverse_iteratorr.h"
-#include "Iterator.h"
+
 using namespace std;
 
 template<typename T>
-
 class Node
 {
 public:
 
 	Node() {
-		this->get_next = this;
-		this->get_previous = this;
+		this->next = this;
+		this->previous = this;
 	}
 
 	Node(const T& value, Node<T>* next, Node<T>* previous) {
 		this->value = value;
 
-		this->get_next = next;
-		this->get_previous = previous;
+		this->next = next;
+		this->previous = previous;
 
-		previous->get_next = this;
-		next->get_previous = this;
+		previous->next = this;
+		next->previous = this;
 	}
 
 	Node(const T& val) {
 		this->value = val;
-		this->get_next = this;
-		this->get_previous = this;
+		this->next = this;
+		this->previous = this;
 	}
 
 
@@ -58,8 +55,16 @@ public:
 
 	}
 
+	 Node<T>* get_next() {
+		return next;
+	}
+
 	const Node<T>* get_next()const {
 		return next;
+	}
+
+	Node<T>* get_previous() {
+		return previous;
 	}
 
 	const Node<T>* get_previous()const {
@@ -67,6 +72,10 @@ public:
 	}
 
 	const T& get_value() const {
+		return value;
+	}
+
+	 T& get_value()  {
 		return value;
 	}
 
