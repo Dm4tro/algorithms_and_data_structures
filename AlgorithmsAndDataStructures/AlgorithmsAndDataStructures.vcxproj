@@ -128,11 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AlgorithmsAndDataStructures.cpp" />
+    <ClCompile Include="Const_Iterator.cpp" />
+    <ClCompile Include="Const_Reverse_Iterator.cpp" />
     <ClCompile Include="Iterator.cpp" />
     <ClCompile Include="Node.cpp" />
-    <ClCompile Include="reverse_iteratorr.cpp" />
+    <ClCompile Include="Reverse_Iteratorr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Const_Iterator.h" />
+    <ClInclude Include="Const_Reverse_Iterator.h" />
     <ClInclude Include="Iterator.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Node.h" />

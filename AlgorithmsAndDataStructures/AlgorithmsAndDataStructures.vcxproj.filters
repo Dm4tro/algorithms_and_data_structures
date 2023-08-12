@@ -24,7 +24,13 @@
     <ClCompile Include="Iterator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="reverse_iteratorr.cpp">
+    <ClCompile Include="Reverse_Iteratorr.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Const_Iterator.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Const_Reverse_Iterator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,6 +45,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Reverse_Iterator.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Const_Iterator.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Const_Reverse_Iterator.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,57 +22,57 @@ using namespace std;
 
 
 template<typename T>
- class Iterator
+class Const_Iterator
 {
 private:
 	Node<T>* current;
 public:
-	Iterator() {
+	Const_Iterator() {
 
 	}
 
-	Iterator(Node<T>* node_ptr) {
+	Const_Iterator(Node<T>* node_ptr) {
 		current = node_ptr;
 	}
 
-	Iterator(const Iterator& iter) {
+	Const_Iterator(const Const_Iterator& iter) {
 		current = iter.current;
 	}
 
 
-	Iterator& operator++() {
+	Const_Iterator& operator++() {
 		current = current->get_next();
 		return *this;
 	}
 
-	Iterator operator++ (int) {
+	Const_Iterator operator++ (int) {
 		Node<T>* temp = current;
 		current = current->get_next();
-		return Iterator(temp);
+		return Const_Iterator(temp);
 	}
-	Iterator operator-- (int) {
+	Const_Iterator operator-- (int) {
 		Node<T>* temp = current;
 		current = current->get_previous();
-		return Iterator(temp);
+		return Const_Iterator(temp);
 
 	}
-	Iterator& operator-- () {
+	Const_Iterator& operator-- () {
 		current = current->get_previous();
 		return *this;
 	}
-	bool operator== (const Iterator& other) const {
+	bool operator== (const Const_Iterator& other) const {
 		return current == other.current;
 	}
 
-	bool operator!= (const Iterator& other) const {
+	bool operator!= (const Const_Iterator& other) const {
 		return !(*this == other);
 	}
 
 	const T& operator*() const { return current->get_value(); }
-	T& operator*()  { return current->get_value(); }
+	
 
 
-	T* operator->() { return &(current->get_value());}
+	const T* operator->() const { return &(current->get_value()); }
 
 
 };

@@ -87,9 +87,10 @@ public:
 		this.next = next;
 	}
 
-	void set_value(Node<T>* previous) {
+	void set_previous(Node<T>* previous) {
 		this.previous = previous;
 	}
+	
 
 private:
 

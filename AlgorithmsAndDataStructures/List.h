@@ -1,43 +1,23 @@
 #pragma once
-#include <iostream>
 #include <list>
 #include <string>
 #include <string.h>
 #include <iomanip>
 #include <iostream>
 #include <iomanip>
-#include <limits>
-#include <fstream>
-#include <cctype>
-#include <vector>
-#include <cmath>
-#include <fstream>
-#include <cstdlib> 
-#include <cctype> 
-#include <map>
 #include <stdarg.h>
 
 #include "Node.h"
 #include "Reverse_Iterator.h"
 #include "Iterator.h"
+#include "Const_Iterator.h"
+#include "Const_Reverse_Iterator.h"
 
 using namespace std;
 
 
 template<typename T> class List
 {
-public:
-    /*template <typename T>*/
-
-   // using Reverse_Iterator  = rreverse_iterator<T>;
-   ///* using reverse_iterator = Reverse_Iterator<T>;*/
-
-   // //using iterator = Iterator<T>;
-   // using Iterator  = iiterator_<T>;
-
-
-
-
 public:
 
     List() {
@@ -58,21 +38,24 @@ public:
     {
         Node<T>* current = head;
         Node<T>* next = NULL;
-
+        Node<T>* EndOfCycle = head;
+        head = NULL;
+        
         do {
             next = current->get_next();
             delete current;
             current = next;
 
-        } while (current != head);
-        delete head;
-        head = NULL;
+        } while (current != EndOfCycle);
+        
+
+        
+
 
     }
 
     List(const List<T>& rhs) {
         copyClass(rhs);
-
     }
 
 
@@ -82,28 +65,45 @@ public:
     Iterator<T> end() {
         return Iterator<T>(head);
     }
-    Reverse_Iterator<T> beginnn() {
+
+    Const_Iterator<T> cend() const {
+        return Const_Iterator<T>(head);
+    }
+
+    Const_Iterator<T> cbeginn() const {
+        return Const_Iterator<T>( head->get_next());
+    }
+
+    Reverse_Iterator<T> beginnn()  {
         return Reverse_Iterator<T>(head->get_previous());
     }
     Reverse_Iterator<T> endd() {
-        return Reverse_Iterator<T>(head);
+        return Reverse_Iterator<T> (head);
     }
 
+    Const_Reverse_Iterator<T> cendd() const {
+        return Const_Reverse_Iterator<T>( head);
+    }
+
+    Const_Reverse_Iterator<T> cbeginnn()  const {
+        return Const_Reverse_Iterator<T>( head->get_previous());
+    }
 
     void add_back(T value) {
         Node<T>* Newnode = new Node<T>(value);
         Node<T>* current = head;
         if (head->get_previous() == head && head->get_next() == head) {
-            head->get_next() = Newnode;
-            head->get_previous() = Newnode;
-            Newnode->get_next() = head;
-            Newnode->get_previous() = head;
+            head->set_next(Newnode);
+            head->set_previous(Newnode);
+            
+            Newnode->set_next(head) ;
+            Newnode->set_previous (head);
             return;
 
         }
-        Newnode->get_previous() = current->get_previous();
-        Newnode->get_next() = current;
-        current->get_previous() = Newnode;
+        Newnode->set_previous(current->get_previous());
+        Newnode->set_next(current);
+        current->set_previous(Newnode);
         /*do
         {
             current = current->next;
@@ -118,10 +118,10 @@ public:
         Node<T>* be_second = current->get_next();
 
         if (head->get_previous() == head && head->get_next() == head) {
-            head->get_next() = Newnode;
-            head->get_previous() = Newnode;
-            Newnode->get_next() = head;
-            Newnode->get_previous() = head;
+            head->set_next(Newnode) ;
+            head->set_previous(Newnode) ;
+            Newnode->set_next(head) ;
+            Newnode->set_previous(head);
             return;
 
         }
@@ -132,9 +132,9 @@ public:
             current = current->next;
         } while (current->next != head);*/
 
-        Newnode->get_next() = be_second;
-        current->get_next() = Newnode;
-        be_second->get_previous() = Newnode;
+        Newnode->set_next(be_second);
+        current->set_next(Newnode);
+        be_second->set_previous(Newnode);
 
 
 
@@ -165,7 +165,7 @@ public:
 
 
 
-    void print()const {
+   const void print()const {
         Node<T>* temp = head->get_next();
         if (head->get_next() == head && head->get_previous() == head) {
             cout << "List is empty" << endl;
@@ -282,5 +282,5 @@ protected:
 
         /*return *this;*/
 
-    }
+    };
 };

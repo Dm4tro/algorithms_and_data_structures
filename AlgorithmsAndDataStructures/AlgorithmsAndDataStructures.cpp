@@ -34,16 +34,11 @@ int main()
 	list3.print();
 
 
-	/*int i1=0, i2 = 0;
-	cout <<"i1= "<< ++i1<<endl;
-	cout << "i1= "<< i2++<<endl;
-	cout << "--------------- " << endl;
-	cout << "i1= " << i1 << endl;
-	cout << "i1= " << i2 << endl;*/
+	
 	std::cout << "--------------- " << endl;
 
 	for (Iterator<std::string> it = list3.beginn();
-		it != list3.end();   //!= have to be implemented
+		it != list3.end();  
 		it++)
 	{
 		std::cout << "f: " << *it << " ";
@@ -60,7 +55,7 @@ int main()
 		iter != list33.endd();
 		iter++)
 	{
-		std::cout << *iter << " ";
+		std::cout << "f: " << *iter << " ";
 	}
 
 	return 0;
