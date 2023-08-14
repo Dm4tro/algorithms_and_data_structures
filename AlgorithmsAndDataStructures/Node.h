@@ -70,6 +70,7 @@ public:
 	const Node<T>* get_previous()const {
 		return previous;
 	}
+	
 
 	const T& get_value() const {
 		return value;

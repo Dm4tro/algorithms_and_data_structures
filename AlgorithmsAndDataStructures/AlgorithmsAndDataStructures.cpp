@@ -58,5 +58,9 @@ int main()
 		std::cout << "f: " << *iter << " ";
 	}
 
+	int nums[3] = { 3,10,1 };
+	int xyx =3 ;
+	List<int> intList(nums, xyx);
+	intList.l_sort(intList.get_start(), intList.get_end());
 	return 0;
 }
