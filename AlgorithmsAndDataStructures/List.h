@@ -50,7 +50,7 @@ public:
         } while (current != EndOfCycle);
         
 
-        counter = 0;
+        
 
 
     }
@@ -111,7 +111,7 @@ public:
         } while (current->next != head);
         current->next = Newnode;
         head = Newnode;*/
-        counter += 1;
+        
     }
     void add_front(T value) {
         Node<T>* Newnode = new Node<T>(value);
@@ -124,7 +124,7 @@ public:
             Newnode->set_next(head) ;
             Newnode->set_previous(head);
 
-            counter += 1;
+           
 
             return;
 
@@ -140,7 +140,6 @@ public:
         current->set_next(Newnode);
         be_second->set_previous(Newnode);
 
-        counter += 1;
 
 
 
@@ -152,13 +151,12 @@ public:
 
         if (isListEmpty(head)) {
             Node<T>* newNode = new Node<T>(value, head, head);
-            counter += 1;
+            
 
             return head;
         }
         else {
             Node<T>* newNode = new Node<T>(value, head, head->get_previous());
-            counter += 1;
 
             return head;
         }
@@ -204,7 +202,7 @@ public:
         }
 
         temp2->get_next() = temp1->get_next();
-        counter -= 1;
+
 
     }
     /*delete temp1;*/
@@ -254,37 +252,44 @@ public:
         return os;
     }
         
-    
-    void l_sort(Node<T>** head, Node<T>** end) {
-        Node* HeadRef  = *head;
-        Node* EndRef = *end;
-        Node* a;
-        Node* b ;
+   void sort(bool (*comparator)(const T& ,const T& )) {
+       Node<T>** hh = &head;
+       Node<T>* p = head->get_previous();
+       Node<T>** pp = &p;
+       l_sort(hh, pp, comparator );
+    }
 
-        Node* c;
-        Node* d= *end;
+    private:
+        void l_sort(Node<T>** head, Node<T>** end, bool (*comparator)(const T&, const T&)) {
+        Node<T>* HeadRef  = *head;
+        Node<T>* EndRef = *end;
+        Node<T>* a;
+        Node<T>* b ;
+
+        Node<T>* c;
+        Node<T>* d= *end;
         
 
-        if ((head->get_next() == end) ||( head==end) {
+        if ((head->get_next() == end) ||( head==end)) {
             return;
         }
         
         FrontBackSplit(HeadRef, &a, &b, &c, &d);
     
             /* Recursively sort the sublists */
-            l_sort(&a, &b);
-            l_sort(&c, &d);
+            l_sort(&a, &b, comparator);
+            l_sort(&c, &d, comparator);
 
             /* answer = merge the two sorted lists together */
-            *headRef = SortedMerge(a, b,c,d);
-
-
+            *HeadRef = SortedMerge(a, b,c,d, comparator);
      }
 
-
-      Node<T>* get_start() {
+        public:
+    Node<T>* get_start() {
         return head;
+
     }
+
 
     Node<T>* get_end() {
         return head->get_previous();
@@ -292,17 +297,9 @@ public:
     }
 
 private:
-    bool compare_int (const int first, const int secound) {
-        if (first <= secound) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
+   
 
-    }
-
-    Node* SortedMerge(Node* a, Node* b, Node* c, Node* d)
+    Node<T>* SortedMerge(Node<T>* a, Node<T>* b, Node<T>* c, Node<T>* d, bool (*comparator)(T, T))
     {
         Node* result = NULL;
 
@@ -313,31 +310,31 @@ private:
             return (a);
         
         /* Pick either a or b, and recur */
-        if (compare_int(a->get_data(), b->get_data())) {
+        if (comparator(a->get_value(), c->get_value())) {
             result = a;
-            result->next = SortedMerge(a->get_next(), b, c, d);
+            result->next = SortedMerge(a->get_next(), b, c, d, bool (*comparator)(T, T));
         }
         else {
-            result = b;
-            result->next =  SortedMerge(a, b,c->get_next(),d);
+            result = c;
+            result->next =  SortedMerge(a, b,c->get_next(),d, bool (*comparator)(T, T));
         }
         return (result);
     }
 
-    void FrontBackSplit(Node* source,
-        Node** frontRefStart, Node** frontRefEnd, Node** backRefStart, Node** backRefEnd)
+    void FrontBackSplit(Node<T>* source,
+        Node<T>** frontRefStart, Node<T>** frontRefEnd, Node<T>** backRefStart, Node<T>** backRefEnd)
     {
-        Node* fast;
-        Node* slow;
+        Node<T>* fast;
+        Node<T>* slow;
         slow = source;
         fast = source->get_next();
         
 
 
         /* Advance 'fast' two nodes, and advance 'slow' one node */
-        while (fast != backRefEnd) {
+        while (fast != *backRefEnd) {
             fast = fast->get_next();
-            if (fast != backRefEnd) {
+            if (fast != *backRefEnd) {
                 slow = slow->get_next();
                 fast = fast->get_next();
             }
@@ -347,11 +344,11 @@ private:
         at that point. */
         *frontRefStart = source;
         *backRefStart = slow->next;
-        frontRefEnd = slow ;
-        backRefEnd = backRefEnd;
+        *frontRefEnd = slow ;
+        *backRefEnd = backRefEnd;
     }
 
-    int counter=0;
+    
 
     Node<T>* head;
 
@@ -390,4 +387,5 @@ protected:
 
     };
 };
+
 

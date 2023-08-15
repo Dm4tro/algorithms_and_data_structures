@@ -63,6 +63,13 @@ public:
 		return next;
 	}
 
+	const Node<T>* get_ref()const {
+		return &next;
+	}
+	 Node<T>* get_ref() {
+		return &next;
+	}
+
 	Node<T>* get_previous() {
 		return previous;
 	}

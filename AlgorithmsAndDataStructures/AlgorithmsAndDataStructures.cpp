@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <iostream>
 #include <iomanip>
+#include <functional>
 #include <limits>
 #include <fstream>
 #include <cctype>
@@ -23,6 +24,27 @@
 #include "Reverse_Iterator.h"
 
 using namespace std;
+template<typename T>
+
+
+bool compare_int(const T &first, const T &secound) {
+	if (first <= secound) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+
+}
+
+int add(int x, int y) { return x + y; }
+int multiply(int x, int y) { return x * y; }
+
+
+int invoke(int x, int y, int (*func)(int, int))
+{
+	return func(x, y);
+}
 
 int main()
 {
@@ -58,9 +80,16 @@ int main()
 		std::cout << "f: " << *iter << " ";
 	}
 
+	std::cout << "--------------- " << endl;
+
+
 	int nums[3] = { 3,10,1 };
-	int xyx =3 ;
+	int xyx = 3;
 	List<int> intList(nums, xyx);
-	intList.l_sort(intList.get_start(), intList.get_end());
+	intList.sort(&compare_int);
+	intList.print();
+	
+	
+
 	return 0;
 }
