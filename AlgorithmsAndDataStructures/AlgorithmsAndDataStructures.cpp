@@ -28,7 +28,7 @@ template<typename T>
 
 
 bool compare_int(const T &first, const T &secound) {
-	if (first <= secound) {
+	if (first <= secound) {//<=
 		return 1;
 	}
 	else {
@@ -80,10 +80,10 @@ int main()
 		std::cout << "f: " << *iter << " ";
 	}
 
-	std::cout << "--------------- " << endl;
+	std::cout <<endl<< "--------------- " << endl;
 
 
-	int nums[3] = { 3,10,1 };
+	int nums[3] = { 65,2,1 };
 	int xyx = 3;
 	List<int> intList(nums, xyx);
 	intList.sort(&compare_int);

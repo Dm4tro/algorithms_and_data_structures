@@ -92,12 +92,14 @@ public:
 	}
 
 	void set_next(Node<T>* next) {
-		this.next = next;
+		this->next = next;
 	}
 
 	void set_previous(Node<T>* previous) {
-		this.previous = previous;
+		this->previous = previous;
 	}
+	
+
 	
 
 private:

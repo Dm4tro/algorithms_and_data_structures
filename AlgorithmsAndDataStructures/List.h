@@ -171,7 +171,7 @@ public:
 
 
    const void print()const {
-        Node<T>* temp = head->get_next();
+       Node<T>* temp = head->get_next();
         if (head->get_next() == head && head->get_previous() == head) {
             cout << "List is empty" << endl;
             return;
@@ -269,8 +269,9 @@ public:
         Node<T>* c;
         Node<T>* d= *end;
         
-
-        if ((head->get_next() == end) ||( head==end)) {
+        //pin_ptr<S> ptest = &test;
+        //*ptest = param;
+        if ((HeadRef->get_next() == *end) ||(HeadRef->get_next()->get_next() == *end)) {
             return;
         }
         
@@ -281,7 +282,7 @@ public:
             l_sort(&c, &d, comparator);
 
             /* answer = merge the two sorted lists together */
-            *HeadRef = SortedMerge(a, b,c,d, comparator);
+            *head = SortedMerge(a, b,c,d, comparator);
      }
 
         public:
@@ -299,9 +300,9 @@ public:
 private:
    
 
-    Node<T>* SortedMerge(Node<T>* a, Node<T>* b, Node<T>* c, Node<T>* d, bool (*comparator)(T, T))
+    Node<T>* SortedMerge(Node<T>* a, Node<T>* b, Node<T>* c, Node<T>* d, bool (*comparator)(const T&, const T&))
     {
-        Node* result = NULL;
+        Node<T>* result = NULL;
 
         /* Base cases */
         if (a == b->get_next())
@@ -311,12 +312,16 @@ private:
         
         /* Pick either a or b, and recur */
         if (comparator(a->get_value(), c->get_value())) {
-            result = a;
-            result->next = SortedMerge(a->get_next(), b, c, d, bool (*comparator)(T, T));
+           // result = a;
+            result = new Node<T>(a->get_value());
+
+          //  result->get_next() = SortedMerge(a->get_next(), b, c, d, comparator);
+            result->set_next(SortedMerge(a->get_next(), b, c, d, comparator));
         }
         else {
-            result = c;
-            result->next =  SortedMerge(a, b,c->get_next(),d, bool (*comparator)(T, T));
+            result = new Node<T>(c->get_value());
+            //result = c;
+            result->set_next(SortedMerge(a, b, c->get_next(), d, comparator));
         }
         return (result);
     }
@@ -343,9 +348,9 @@ private:
         /* 'slow' is before the midpoint in the list, so split it in two
         at that point. */
         *frontRefStart = source;
-        *backRefStart = slow->next;
-        *frontRefEnd = slow ;
-        *backRefEnd = backRefEnd;
+        *frontRefEnd = slow;
+        *backRefStart = slow->get_next();
+        *backRefEnd = fast;
     }
 
     
