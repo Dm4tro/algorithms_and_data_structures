@@ -143,6 +143,7 @@ public:
 
 
 
+
     }
 
     //template<class T>
@@ -317,11 +318,13 @@ private:
 
           //  result->get_next() = SortedMerge(a->get_next(), b, c, d, comparator);
             result->set_next(SortedMerge(a->get_next(), b, c, d, comparator));
+            result->get_next()->set_previous(result); //added
         }
         else {
             result = new Node<T>(c->get_value());
             //result = c;
             result->set_next(SortedMerge(a, b, c->get_next(), d, comparator));
+            result->get_next()->set_previous(result);  //added
         }
         return (result);
     }
@@ -350,7 +353,8 @@ private:
         *frontRefStart = source;
         *frontRefEnd = slow;
         *backRefStart = slow->get_next();
-        *backRefEnd = fast;
+        *backRefEnd = *frontRefEnd;
+        /**backRefEnd = fast;*/
     }
 
     
