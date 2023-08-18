@@ -254,7 +254,8 @@ public:
     }
         
    void sort(bool (*comparator)(const T& ,const T& )) {
-       Node<T>** hh = &head;
+       Node<T>* temp = head->get_next();
+       Node<T>** hh = &temp;
        Node<T>* p = head->get_previous();
        Node<T>** pp = &p;
        l_sort(hh, pp, comparator );
@@ -265,14 +266,14 @@ public:
         Node<T>* HeadRef  = *head;
         Node<T>* EndRef = *end;
         Node<T>* a;
-        Node<T>* b ;
+        Node<T>* b;
 
         Node<T>* c;
-        Node<T>* d= *end;
+        Node<T>* d = *end;
         
         //pin_ptr<S> ptest = &test;
         //*ptest = param;
-        if ((HeadRef->get_next() == *end) ||(HeadRef->get_next()->get_next() == *end)) {
+        if ( (HeadRef->get_next() == HeadRef)) {  //||(HeadRef->get_next()->get_next() == *end)) //HeadRef->get_next()->get_next() == HeadRef ||
             return;
         }
         
@@ -352,8 +353,14 @@ private:
         at that point. */
         *frontRefStart = source;
         *frontRefEnd = slow;
+        
         *backRefStart = slow->get_next();
-        *backRefEnd = *frontRefEnd;
+        fast->set_next(*backRefStart);
+
+        
+        *backRefEnd = fast;
+
+        slow->set_next(*frontRefStart);
         /**backRefEnd = fast;*/
     }
 
