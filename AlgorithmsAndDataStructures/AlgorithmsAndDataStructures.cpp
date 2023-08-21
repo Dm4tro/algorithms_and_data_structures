@@ -83,8 +83,8 @@ int main()
 	std::cout <<endl<< "--------------- " << endl;
 
 
-	int nums[3] = { 65,2,1 };
-	int xyx = 3;
+	int nums[5] = { 65,2,1,1342,33 };
+	int xyx = 5;
 	List<int> intList(nums, xyx);
 	intList.sort(&compare_int);
 	intList.print();
