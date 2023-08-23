@@ -36,7 +36,9 @@ bool compare_int(const T &first, const T &secound) {
 	}
 
 }
-
+int return_1() {
+	return 1;
+}
 int add(int x, int y) { return x + y; }
 int multiply(int x, int y) { return x * y; }
 
@@ -83,10 +85,10 @@ int main()
 	std::cout <<endl<< "--------------- " << endl;
 
 
-	int nums[5] = { 65,2,1,1342,33 };
-	int xyx = 5;
+	int nums[] = { 65,2,1,1342,33, 657,0,3423 };
+	int xyx = 8;
 	List<int> intList(nums, xyx);
-	intList.sort(&compare_int);
+	intList.Sort(&compare_int);
 	intList.print();
 	
 	

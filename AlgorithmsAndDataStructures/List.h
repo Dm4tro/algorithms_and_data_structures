@@ -29,7 +29,7 @@ public:
         //const auto size = sizeof(values) == 0 ? 0 : size;
         for (int i = 0; i < size; ++i)
         {
-            add_before_head(values[i], head);
+            AddBeforeHead(values[i], head);
         }
 
     }
@@ -90,7 +90,7 @@ public:
         return Const_Reverse_Iterator<T>( head->get_previous());
     }
 
-    void add_back(T value) {
+    void AddBack(T value) {
         Node<T>* Newnode = new Node<T>(value);
         Node<T>* current = head;
         if (head->get_previous() == head && head->get_next() == head) {
@@ -113,7 +113,7 @@ public:
         head = Newnode;*/
         
     }
-    void add_front(T value) {
+    void AddFront(T value) {
         Node<T>* Newnode = new Node<T>(value);
         Node<T>* current = head;
         Node<T>* be_second = current->get_next();
@@ -130,24 +130,14 @@ public:
 
         }
 
-
-        /*do
-        {
-            current = current->next;
-        } while (current->next != head);*/
-
         Newnode->set_next(be_second);
         current->set_next(Newnode);
         be_second->set_previous(Newnode);
 
-
-
-
-
     }
 
     //template<class T>
-    static Node<T>* add_before_head(const T& value, Node<T>*& head) {
+    static Node<T>* AddBeforeHead(const T& value, Node<T>*& head) {
 
 
         if (isListEmpty(head)) {
@@ -190,7 +180,7 @@ public:
     }
 
 
-    void delete_at(int num) {
+    void DeleteAt(int num) {
 
         Node<T>* temp1 = head;
         Node<T>* temp2 = NULL;
@@ -253,18 +243,17 @@ public:
         return os;
     }
         
-   void sort(bool (*comparator)(const T& ,const T& )) {
+   void Sort(bool (*comparator)(const T& ,const T& )) {
        Node<T>* temp1 = head->get_next();
-       Node<T>** hh = &temp1;
-      /* Node<T>* p = head->get_previous();
-       Node<T>** pp = &p;*/
+       Node<T>** temporary_head = &temp1;
+    
        Node<T>* temp2 = head;
       temp2 = temp2->get_previous();
       temp2->set_next(NULL);
        
-       ListMergeSort(hh, comparator);
+       SortListWithMergeSort(temporary_head, comparator);
 
-       Node<T>* repair = *hh;
+       Node<T>* repair = *temporary_head;
        Node<T>* temp3=repair;
        head->set_next(temp3);
        while (temp3->get_next()!=NULL)
@@ -289,7 +278,7 @@ public:
             head->set_previous(temp_back);
 
         }
-        void ListMergeSort(Node<T>** headRef,  bool (*comparator)(const T&, const T&))
+        void SortListWithMergeSort(Node<T>** headRef,  bool (*comparator)(const T&, const T&))
         {
             Node<T>* header = *headRef;
             Node<T>* a;
@@ -301,17 +290,17 @@ public:
             }
 
             /* Split head into 'a' and 'b' sublists */
-            FrontBackSplit(header, &a, &b);
+            SplitInFrontAndBack(header, &a, &b);
 
             /* Recursively sort the sublists */
-            ListMergeSort(&a, comparator);
-            ListMergeSort(&b, comparator);
+            SortListWithMergeSort(&a, comparator);
+            SortListWithMergeSort(&b, comparator);
 
             /* answer = merge the two sorted lists together */
-            *headRef = SortedMerge(a, b, comparator);
+            *headRef = SortMergedParts(a, b, comparator);
         }
 
-        void FrontBackSplit(Node<T>* source,
+        void SplitInFrontAndBack(Node<T>* source,
             Node<T>** frontRef, Node<T>** backRef)
         {
             Node<T>* fast;
@@ -335,7 +324,7 @@ public:
             slow->set_next(NULL);
         }
 
-        Node<T>* SortedMerge(Node<T>* a, Node<T>* b, bool (*comparator)(const T&, const T&))
+        Node<T>* SortMergedParts(Node<T>* a, Node<T>* b, bool (*comparator)(const T&, const T&))
         {
             Node<T>* result = NULL;
 
@@ -349,105 +338,16 @@ public:
             if (comparator(a->get_value(), b->get_value())) {
                 
                 result = a;
-                result->set_next(SortedMerge(a->get_next(), b, comparator)) ;
+                result->set_next(SortMergedParts(a->get_next(), b, comparator)) ;
             }
             else {
                 result = b;
-                result->set_next(SortedMerge(a, b->get_next(), comparator));
+                result->set_next(SortMergedParts(a, b->get_next(), comparator));
             }
             return (result);
         }
 
-    //    void l_sort(Node<T>** head, Node<T>** end, bool (*comparator)(const T&, const T&)) {
-    //    Node<T>* HeadRef  = *head;
-    //    Node<T>* EndRef = *end;
-    //    Node<T>* a;
-    //    Node<T>* b;
-
-    //    Node<T>* c;
-    //    Node<T>* d = *end;
-    //    
-    //    //pin_ptr<S> ptest = &test;
-    //    //*ptest = param;
-    //    if ( (HeadRef->get_next() == HeadRef)) {  //||(HeadRef->get_next()->get_next() == *end)) //HeadRef->get_next()->get_next() == HeadRef ||
-    //        return;
-    //    }
-    //    
-    //    FrontBackSplit(HeadRef, &a, &b, &c, &d);
-    //
-    //        /* Recursively sort the sublists */
-    //        l_sort(&a, &b, comparator);
-    //        l_sort(&c, &d, comparator);
-
-    //        /* answer = merge the two sorted lists together */
-    //        *head = SortedMerge(a, b,c,d, comparator);
-    // }
- 
-
-
-   
-
-    //Node<T>* SortedMerge(Node<T>* a, Node<T>* b, Node<T>* c, Node<T>* d, bool (*comparator)(const T&, const T&))
-    //{
-    //    Node<T>* result = NULL;
-
-    //    /* Base cases */
-    //    if (a == b->get_next())
-    //        return (c);
-    //    else if (b == d->get_next())
-    //        return (a);
-    //    
-    //    /* Pick either a or b, and recur */
-    //    if (comparator(a->get_value(), c->get_value())) {
-    //       // result = a;
-    //        result = new Node<T>(a->get_value());
-
-    //      //  result->get_next() = SortedMerge(a->get_next(), b, c, d, comparator);
-    //        result->set_next(SortedMerge(a->get_next(), b, c, d, comparator));
-    //        result->get_next()->set_previous(result); //added
-    //    }
-    //    else {
-    //        result = new Node<T>(c->get_value());
-    //        //result = c;
-    //        result->set_next(SortedMerge(a, b, c->get_next(), d, comparator));
-    //        result->get_next()->set_previous(result);  //added
-    //    }
-    //    return (result);
-    //}
-
-    //void FrontBackSplit(Node<T>* source,
-    //    Node<T>** frontRefStart, Node<T>** frontRefEnd, Node<T>** backRefStart, Node<T>** backRefEnd)
-    //{
-    //    Node<T>* fast;
-    //    Node<T>* slow;
-    //    slow = source;
-    //    fast = source->get_next();
-    //    
-
-
-    //    /* Advance 'fast' two nodes, and advance 'slow' one node */
-    //    while (fast != *backRefEnd) {
-    //        fast = fast->get_next();
-    //        if (fast != *backRefEnd) {
-    //            slow = slow->get_next();
-    //            fast = fast->get_next();
-    //        }
-    //    }
-
-    //    /* 'slow' is before the midpoint in the list, so split it in two
-    //    at that point. */
-    //    *frontRefStart = source;
-    //    *frontRefEnd = slow;
-    //    
-    //    *backRefStart = slow->get_next();
-    //    fast->set_next(*backRefStart);
-
-    //    
-    //    *backRefEnd = fast;
-
-    //    slow->set_next(*frontRefStart);
-    //    /**backRefEnd = fast;*/
-    //}
+    
 
     
 
@@ -471,7 +371,7 @@ protected:
         Node<T>* temp = rs.head;
 
 
-        /*head = temp;*/
+        
 
 
 
