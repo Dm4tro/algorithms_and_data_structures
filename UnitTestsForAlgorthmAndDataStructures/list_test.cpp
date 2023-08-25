@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "D:\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures"
+//#include "D:\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures"
+#include "Algorith"
 #include "gtest/gtest.h"
 
 using namespace std;
