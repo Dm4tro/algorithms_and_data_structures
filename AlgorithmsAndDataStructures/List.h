@@ -118,7 +118,7 @@ public:
         Node<T>* current = head;
         Node<T>* be_second = current->get_next();
 
-        if (head->get_previous() == head && head->get_next() == head) {
+        if (isListEmpty(head)) {
             head->set_next(Newnode) ;
             head->set_previous(Newnode) ;
             Newnode->set_next(head) ;
@@ -162,7 +162,7 @@ public:
 
    const void print()const {
        Node<T>* temp = head->get_next();
-        if (head->get_next() == head && head->get_previous() == head) {
+        if (isListEmpty(head)) {
             cout << "List is empty" << endl;
             return;
         }
@@ -199,32 +199,36 @@ public:
     /*delete temp1;*/
     List<T>& operator=(List<T>& rhs) {
 
-        Node<T>* current = head;
+        Node<T>* current =rhs.head;
         Node<T>* next = NULL;
-        while (current != NULL)
+       
+        do
         {
+
             next = current->get_next();
             delete current;
             current = next;
 
-        }
+
+        } while (current != rhs.head);
         head = nullptr;
 
-        Node<T>* temp = rhs.head;
+        Node<T>* temp = rhs.head->get_next();
 
 
         /*head = temp;*/
 
 
 
-        while (temp != NULL)
+        do
         {
 
-            add(temp->value);
+            AddBack(temp->get_value());
             temp = temp->get_next();
 
 
-        }
+        }       while (temp != rhs.head);
+       
 
         return *this;
     }
@@ -232,18 +236,31 @@ public:
 
     friend ostream& operator<<(ostream& os, const List<T>& rhs)
     {
-        Node<T>* temp = head;
-        os << "THList is:" << endl;
-        while (temp != NULL)
-        {
-            os << temp->get_value() << " ";
-            temp = temp->get_next();
+        Node<T>* temp = rhs.head->get_next();
+        if (isListEmpty(rhs.head)) {
+            os << "List is empty" << endl;
+            return os;
         }
+
+       
+        os << "List is:" << endl;
+        
+        do
+        {
+            os  << temp->get_value() << " ";
+            temp = temp->get_next();
+
+
+        } while (temp != rhs.head);
         os << endl;
         return os;
     }
         
    void Sort(bool (*comparator)(const T& ,const T& )) {
+       if (isListEmpty(head)) {
+           cout << "Error, can't compare empty list!!!" << endl;
+           return;
+       }
        Node<T>* temp1 = head->get_next();
        Node<T>** temporary_head = &temp1;
     
@@ -359,31 +376,28 @@ protected:
     void copyClass(List rs) {
         Node<T>* current = head;
         Node<T>* next = NULL;
-        while (current != NULL)
+        
+        do
         {
+
             next = current->get_next();
             delete current;
             current = next;
 
-        }
-        head = nullptr;
 
+        } while (current != rs.head);
+        head = nullptr;
         Node<T>* temp = rs.head;
 
-
-        
-
-
-
-        while (temp != NULL)
+       
+        do
         {
 
-            add(temp->value);
+            AddBack(temp->get_value());
             temp = temp->get_next();
 
 
-        }
-
+        } while (temp != rhs.head);
         /*return *this;*/
 
     };
