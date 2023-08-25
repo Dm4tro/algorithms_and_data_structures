@@ -70,12 +70,28 @@ TEST(LIstSort, printTest4) {
     List<int> intList3(nums, xyx);
     intList3.Sort(&compare_int);
     cout << intList3;
-
+    
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "List is:\n3 \n");
 }
 
-int main(int argc, char** argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+TEST(deleteAtTest, BasicTest) {
+    testing::internal::CaptureStdout();
+
+
+    int nums[] = { 0,1,2 };
+    int xyx = 3;
+    List<int> intList3(nums, xyx);
+    try {
+        intList3.DeleteAt(1);
+    }
+    catch (const char* msg) {
+        cerr << msg << endl;
+    }
+   
+    /*cout << intList3;*/
+
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "You can't delete at index 0 or lower!!!");
 }
+

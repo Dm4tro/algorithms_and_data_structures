@@ -30,6 +30,7 @@ public:
         for (int i = 0; i < size; ++i)
         {
             AddBeforeHead(values[i], head);
+           
         }
 
     }
@@ -49,7 +50,7 @@ public:
 
         } while (current != EndOfCycle);
         
-
+        size = 0;
         
 
 
@@ -90,6 +91,10 @@ public:
         return Const_Reverse_Iterator<T>( head->get_previous());
     }
 
+    unsigned int get_size() {
+        return size;
+    }
+    
     void AddBack(T value) {
         Node<T>* Newnode = new Node<T>(value);
         Node<T>* current = head;
@@ -100,17 +105,21 @@ public:
             Newnode->set_next(head) ;
             Newnode->set_previous (head);
             return;
-
+            size += 1;
         }
         Newnode->set_previous(current->get_previous());
+        current->get_previous()->set_next();
         Newnode->set_next(current);
         current->set_previous(Newnode);
+
+        size += 1;
         /*do
         {
             current = current->next;
         } while (current->next != head);
         current->next = Newnode;
         head = Newnode;*/
+        
         
     }
     void AddFront(T value) {
@@ -123,7 +132,7 @@ public:
             head->set_previous(Newnode) ;
             Newnode->set_next(head) ;
             Newnode->set_previous(head);
-
+            size += 1;
            
 
             return;
@@ -133,23 +142,25 @@ public:
         Newnode->set_next(be_second);
         current->set_next(Newnode);
         be_second->set_previous(Newnode);
+        size += 1;
 
     }
 
     //template<class T>
-    static Node<T>* AddBeforeHead(const T& value, Node<T>*& head) {
+    Node<T>* AddBeforeHead(const T& value, Node<T>*& head) {
 
 
         if (isListEmpty(head)) {
             Node<T>* newNode = new Node<T>(value, head, head);
             
-
+            
             return head;
         }else {
             Node<T>* newNode = new Node<T>(value, head, head->get_previous());
-
+           
             return head;
         }
+        size += 1;
         return 0;
     }
 
@@ -180,21 +191,26 @@ public:
     }
 
 
-    void DeleteAt(int num) {
-
-        Node<T>* temp1 = head;
+    void DeleteAt(unsigned int num) {
+        if (num<=0)
+        {
+            throw exception("You can't delete at index 0 or lower!!!");
+        }
+        num += 1;
+        Node<T>* tempfirst = head;
         Node<T>* temp2 = NULL;
 
         while (num-- > 1)
         {
-            temp2 = temp1;
-            temp1 = temp1->get_next();
+            temp2 = tempfirst;
+            tempfirst = tempfirst->get_next();
         }
 
 
-        temp2->get_next() = temp1->get_next();
+        temp2->set_next(tempfirst->get_next());
+        tempfirst->get_next()->set_previous(temp2);
 
-
+        size -= 1;
     }
     /*delete temp1;*/
     List<T>& operator=(List<T>& rhs) {
@@ -229,6 +245,7 @@ public:
 
         }       while (temp != rhs.head);
        
+        size = rhs.size;
 
         return *this;
     }
@@ -366,13 +383,14 @@ public:
 
     
 
-    
+   
 
     Node<T>* head;
 
 
 
 protected:
+    unsigned int size = 0;
     void copyClass(List rs) {
         Node<T>* current = head;
         Node<T>* next = NULL;
@@ -397,9 +415,9 @@ protected:
             temp = temp->get_next();
 
 
-        } while (temp != rhs.head);
+        } while (temp != rs.head);
         /*return *this;*/
-
+        size = rs.size;
     };
 };
 
