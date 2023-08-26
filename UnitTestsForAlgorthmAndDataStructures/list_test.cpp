@@ -83,15 +83,15 @@ TEST(deleteAtTest, BasicTest) {
     int xyx = 3;
     List<int> intList3(nums, xyx);
     try {
-        intList3.DeleteAt(1);
+        intList3.DeleteAt(0);
     }
     catch (const char* msg) {
-        cerr << msg << endl;
+        cout<< msg << endl;
     }
    
     /*cout << intList3;*/
 
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "You can't delete at index 0 or lower!!!");
+    EXPECT_EQ(output, "You can't delete  at index 0 or lower!!!");
 }
 
