@@ -173,3 +173,85 @@ TEST(CopyClasstest, BasicTest0) {
 }
 
 
+
+TEST(IteratorTest, BasicTest0) {
+    testing::internal::CaptureStdout();
+
+
+    std::string myNum[3] = { "fsd","sadasd","dsad" };
+    int x = 3;
+    List<std::string> list3(myNum, x);
+   
+    cout << "List is:";
+    for (Iterator<std::string> it = list3.beginn();
+        it != list3.end();
+        it++)
+    {
+        std::cout << " " << *it ;
+    }
+
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "List is: fsd sadasd dsad");
+}
+
+TEST(ReverseIteratorTest, BasicTest0) {
+    testing::internal::CaptureStdout();
+
+
+    std::string myNum[3] = { "fsd","sadasd","dsad" };
+    int x = 3;
+    List<std::string> list3(myNum, x);
+
+    cout << "List is:";
+
+    for (Reverse_Iterator<string> iter = list3.beginnn();
+        iter != list3.endd();
+        iter++)
+    {
+        std::cout << " " << *iter;
+    }
+
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "List is: dsad sadasd fsd");
+}
+
+TEST(ConstReverseIteratorTest, BasicTest0) {
+    testing::internal::CaptureStdout();
+
+
+    std::string myNum[3] = { "fsd","sadasd","dsad" };
+    int x = 3;
+    List<std::string> list3(myNum, x);
+
+    cout << "List is:";
+
+    for (Const_Reverse_Iterator<string> iter = list3.cbeginnn();
+        iter != list3.cendd();
+        iter++)
+    {
+        std::cout << " " << *iter;
+    }
+
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "List is: dsad sadasd fsd");
+}
+
+TEST(ConstIteratorTest, BasicTest0) {
+    testing::internal::CaptureStdout();
+
+
+    std::string myNum[3] = { "fsd","sadasd","dsad" };
+    int x = 3;
+    List<std::string> list3(myNum, x);
+
+    cout << "List is:";
+    for (Const_Iterator<std::string> it = list3.cbeginn();
+        it != list3.cend();
+        it++)
+    {
+        std::cout << " " << *it;
+    }
+
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "List is: fsd sadasd dsad");
+}
