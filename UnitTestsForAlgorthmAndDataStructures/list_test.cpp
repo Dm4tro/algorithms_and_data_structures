@@ -171,3 +171,5 @@ TEST(CopyClasstest, BasicTest0) {
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "List is:\n0 1 2 \n");
 }
+
+
