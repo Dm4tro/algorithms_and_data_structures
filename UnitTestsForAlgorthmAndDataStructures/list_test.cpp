@@ -255,3 +255,16 @@ TEST(ConstIteratorTest, BasicTest0) {
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "List is: fsd sadasd dsad");
 }
+
+TEST(SizeTest, BasicTest0) {
+    testing::internal::CaptureStdout();
+
+    int nums[] = { 3,2,1 };
+    int xyx = 3;
+    List<int> intList(nums, xyx);
+
+    intList.print();
+    cout << intList.get_size() << endl;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "List is:\n3 2 1 \n3\n");
+}

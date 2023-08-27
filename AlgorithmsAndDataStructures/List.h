@@ -51,7 +51,7 @@ public:
 
         } while (current != EndOfCycle);
 
-        size = 0;
+        sizeOfList = 0;
 
     }
 
@@ -91,7 +91,7 @@ public:
     }
 
     unsigned int get_size() {
-        return size;
+        return sizeOfList;
     }
 
     void AddBack(T value) {
@@ -104,7 +104,7 @@ public:
 
             Newnode->set_next(head);
             Newnode->set_previous(head);
-            size += 1;
+            sizeOfList += 1;
             return;
         }
 
@@ -113,7 +113,7 @@ public:
         Newnode->set_next(current);
         current->set_previous(Newnode);
 
-        size += 1;
+        sizeOfList += 1;
         /*do
         {
             current = current->next;
@@ -133,7 +133,7 @@ public:
             head->set_previous(Newnode);
             Newnode->set_next(head);
             Newnode->set_previous(head);
-            size += 1;
+            sizeOfList += 1;
 
 
             return;
@@ -143,7 +143,7 @@ public:
         Newnode->set_next(be_second);
         current->set_next(Newnode);
         be_second->set_previous(Newnode);
-        size += 1;
+        sizeOfList += 1;
 
     }
 
@@ -154,15 +154,15 @@ public:
         if (isListEmpty(head)) {
             Node<T>* newNode = new Node<T>(value, head, head);
 
-
+            sizeOfList += 1;
             return head;
         }
         else {
             Node<T>* newNode = new Node<T>(value, head, head->get_previous());
-
+            sizeOfList += 1;
             return head;
         }
-        size += 1;
+        
         return 0;
     }
 
@@ -212,7 +212,7 @@ public:
         temp2->set_next(tempfirst->get_next());
         tempfirst->get_next()->set_previous(temp2);
 
-        size -= 1;
+        sizeOfList -= 1;
     }
     /*delete temp1;*/
     List<T>& operator=(List<T>& rhs) {
@@ -244,7 +244,7 @@ public:
             rhstemp = rhstemp->get_next();
         }
 
-        size = rhs.size;
+        sizeOfList = rhs.sizeOfList;
 
         return *this;
     }
@@ -389,7 +389,7 @@ private:
 
 
 protected:
-    unsigned int size = 0;
+    unsigned int sizeOfList = 0;
     void copyClass(const List& rs) {
 
         if (rs.head == NULL) {
@@ -417,7 +417,7 @@ protected:
         
         Current->set_next(head);
 
-        size = rs.size;
+        sizeOfList = rs.sizeOfList;
 
         FixPrevLink();
 
