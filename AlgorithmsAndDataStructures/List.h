@@ -392,6 +392,11 @@ protected:
     unsigned int size = 0;
     void copyClass(const List& rs) {
 
+        if (rs.head == NULL) {
+            head = NULL;
+            return;
+        }
+
         Node<T>* otherCurrent = rs.head;
         
         head = new Node<T>(otherCurrent->get_value());
