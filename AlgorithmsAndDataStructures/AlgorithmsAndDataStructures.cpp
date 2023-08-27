@@ -90,8 +90,17 @@ int main()
 	List<int> intList(nums, xyx);
 	intList.Sort(&compare_int);
 	intList.print();
-	
-	
 
+
+	int numss[] = { 65,0,1,0,33, 657,0,0 };
+	int xyxx = 8;
+	List<int> intList2(numss, xyxx);
+	std::cout << endl << "--------------- " << endl;
+	intList2 = intList;
+	intList2.print();
+
+	std::cout << endl << "--------------- " << endl;
+	List<int> intListt(intList);
+	intListt.print();
 	return 0;
 }

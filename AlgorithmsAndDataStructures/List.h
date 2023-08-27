@@ -12,6 +12,7 @@
 #include "Iterator.h"
 #include "Const_Iterator.h"
 #include "Const_Reverse_Iterator.h"
+#include <stdexcept>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ public:
 
     ~List()
     {
-        Node<T>* current = head;
+        Node<T>* current = head->get_next();
         Node<T>* next = NULL;
         Node<T>* EndOfCycle = head;
         head = NULL;
@@ -51,8 +52,6 @@ public:
         } while (current != EndOfCycle);
 
         size = 0;
-
-
 
     }
 
@@ -98,17 +97,19 @@ public:
     void AddBack(T value) {
         Node<T>* Newnode = new Node<T>(value);
         Node<T>* current = head;
-        if (head->get_previous() == head && head->get_next() == head) {
+
+        if (isListEmpty(head)) {
             head->set_next(Newnode);
             head->set_previous(Newnode);
 
             Newnode->set_next(head);
             Newnode->set_previous(head);
-            return;
             size += 1;
+            return;
         }
+
         Newnode->set_previous(current->get_previous());
-        current->get_previous()->set_next();
+        current->get_previous()->set_next(Newnode);
         Newnode->set_next(current);
         current->set_previous(Newnode);
 
@@ -195,7 +196,7 @@ public:
     void DeleteAt(unsigned int num) {
         if (num <= 0)
         {
-            throw exception("You can't delete at index 0 or lower!!!");
+            throw invalid_argument("You can't delete at index 0 or lower!!!");
         }
         num += 1;
         Node<T>* tempfirst = head;
@@ -216,7 +217,7 @@ public:
     /*delete temp1;*/
     List<T>& operator=(List<T>& rhs) {
 
-        Node<T>* current = rhs.head;
+        Node<T>* current = head;
         Node<T>* next = NULL;
 
         do
@@ -227,24 +228,21 @@ public:
             current = next;
 
 
-        } while (current != rhs.head);
-        head = nullptr;
+        } while (current != head);
 
-        Node<T>* temp = rhs.head->get_next();
+        
+        head->set_next(head);
+        head->set_previous(head);
+
+        Node<T>* rhstemp = rhs.head->get_next();
 
 
         /*head = temp;*/
 
-
-
-        do
-        {
-
-            AddBack(temp->get_value());
-            temp = temp->get_next();
-
-
-        } while (temp != rhs.head);
+        while(rhstemp != rhs.head) {
+            AddBack(rhstemp->get_value());
+            rhstemp = rhstemp->get_next();
+        }
 
         size = rhs.size;
 
@@ -392,33 +390,33 @@ private:
 
 protected:
     unsigned int size = 0;
-    void copyClass(List rs) {
-        Node<T>* current = head;
-        Node<T>* next = NULL;
+    void copyClass(const List& rs) {
 
-        do
-        {
+        Node<T>* otherCurrent = rs.head;
+        
+        head = new Node<T>(otherCurrent->get_value());
 
-            next = current->get_next();
-            delete current;
-            current = next;
+        Node<T>* Current = head;
+        Node<T>* Previous = head;
 
+        otherCurrent = otherCurrent->get_next();
 
-        } while (current != rs.head);
-        head = nullptr;
-        Node<T>* temp = rs.head;
+        while (otherCurrent != rs.head) {
+            Node<T>* newNode = new Node<T>(otherCurrent->get_value());
+            Current->set_next(newNode) ;
+            Previous = Current;
+            Current = newNode;
+            otherCurrent = otherCurrent->get_next();
+        }
 
+        
+        Current->set_next(head);
 
-        do
-        {
-
-            AddBack(temp->get_value());
-            temp = temp->get_next();
-
-
-        } while (temp != rs.head);
-        /*return *this;*/
         size = rs.size;
+
+        FixPrevLink();
+
+       
     };
 };
 
