@@ -249,6 +249,15 @@ public:
         return *this;
     }
 
+    friend istream& operator>>(istream& is, List<T> rhs)
+    {
+        T value;
+        is >> value;
+
+        rhs.AddBeforeHead(value, rhs.head);
+
+        return is;
+    }
 
     friend ostream& operator<<(ostream& os, const List<T>& rhs)
     {

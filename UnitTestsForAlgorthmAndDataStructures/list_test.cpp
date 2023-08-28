@@ -268,3 +268,18 @@ TEST(SizeTest, BasicTest0) {
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "List is:\n3 2 1 \n3\n");
 }
+
+TEST(InputOperator, BasicTest1) {
+    testing::internal::CaptureStdout();
+    
+
+   
+    List<int> intList3;
+
+    
+    cin >> intList3;
+    cout << intList3;
+
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "List is:\n5 \n");
+}
