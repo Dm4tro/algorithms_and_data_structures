@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "..\AlgorithmsAndDataStructures\List.h"
+#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\List.h"
+#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\hash_map\hash_map.h"
 
 #include "gtest/gtest.h"
 #include <string>

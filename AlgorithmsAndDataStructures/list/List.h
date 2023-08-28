@@ -173,7 +173,7 @@ public:
 
 
 
-    const void print()const {
+    const void Print()const {
         Node<T>* temp = head->get_next();
         if (isListEmpty(head)) {
             cout << "List is empty" << endl;
@@ -249,7 +249,7 @@ public:
         return *this;
     }
 
-    friend istream& operator>>(istream& is, List<T> rhs)
+    friend istream& operator>>(istream& is, List<T>& rhs)
     {
         T value;
         is >> value;

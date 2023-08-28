@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "..\AlgorithmsAndDataStructures\List.h"
+
+#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\List.h"
 
 #include "gtest/gtest.h"
 #include <string>
@@ -29,7 +30,7 @@ TEST(LIstSort, printTest) {
     int xyx = 3;
     List<int> intList(nums, xyx);
     intList.Sort(&compare_int);
-    intList.print();
+    intList.Print();
 
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "List is:\n1 2 3 \n");
@@ -43,7 +44,7 @@ TEST(LIstSort, printTest2) {
     List<int> intList(nums, xyx);
     intList.Sort(&compare_int);
     intList.AddFront(300);
-    intList.print();
+    intList.Print();
 
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output,"List is:\n300 -1 1 2 3 21 333333 \n");
@@ -55,7 +56,7 @@ TEST(LIstSort, printTest3) {
     
     List<int> intList2;
     intList2.Sort(&compare_int);
-    intList2.print();
+    intList2.Print();
 
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "Error, can't compare empty list!!!\nList is empty\n");
@@ -263,7 +264,7 @@ TEST(SizeTest, BasicTest0) {
     int xyx = 3;
     List<int> intList(nums, xyx);
 
-    intList.print();
+    intList.Print();
     cout << intList.get_size() << endl;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "List is:\n3 2 1 \n3\n");

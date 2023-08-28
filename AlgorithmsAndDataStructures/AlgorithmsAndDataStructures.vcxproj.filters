@@ -18,39 +18,45 @@
     <ClCompile Include="AlgorithmsAndDataStructures.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
+    <ClCompile Include="list\Node.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Iterator.cpp">
+    <ClCompile Include="list\Iterator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Reverse_Iteratorr.cpp">
+    <ClCompile Include="list\Reverse_Iteratorr.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Const_Iterator.cpp">
+    <ClCompile Include="list\Const_Iterator.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Const_Reverse_Iterator.cpp">
+    <ClCompile Include="list\Const_Reverse_Iterator.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="hash_map\hash_map.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="list\Node.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
+    <ClInclude Include="list\List.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Iterator.h">
+    <ClInclude Include="list\Iterator.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Reverse_Iterator.h">
+    <ClInclude Include="list\Reverse_Iterator.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Const_Iterator.h">
+    <ClInclude Include="list\Const_Iterator.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Const_Reverse_Iterator.h">
+    <ClInclude Include="list\Const_Reverse_Iterator.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="hash_map\hash_map.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

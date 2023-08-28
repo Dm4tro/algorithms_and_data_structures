@@ -18,10 +18,11 @@
 #include <stdarg.h>
 #include <list>
 #include <cstdarg>
-#include "Node.h"
-#include "List.h"
-#include "Iterator.h"
-#include "Reverse_Iterator.h"
+
+#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\Node.h"
+#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\List.h"
+#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\Iterator.h"
+#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\Reverse_Iterator.h"
 
 using namespace std;
 template<typename T>
@@ -55,7 +56,7 @@ int main()
 	std::string myNum[3] = { "fsd","sadasd","dsad" };
 	int x = 3;
 	List<std::string> list3(myNum, x);
-	list3.print();
+	list3.Print();
 
 
 	
@@ -89,7 +90,7 @@ int main()
 	int xyx = 8;
 	List<int> intList(nums, xyx);
 	intList.Sort(&compare_int);
-	intList.print();
+	intList.Print();
 
 
 	int numss[] = { 65,0,1,0,33, 657,0,0 };
@@ -97,10 +98,10 @@ int main()
 	List<int> intList2(numss, xyxx);
 	std::cout << endl << "--------------- " << endl;
 	intList2 = intList;
-	intList2.print();
+	intList2.Print();
 
 	std::cout << endl << "--------------- " << endl;
 	List<int> intListt(intList);
-	intListt.print();
+	intListt.Print();
 	return 0;
 }
