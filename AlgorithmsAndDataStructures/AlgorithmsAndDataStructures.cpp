@@ -26,6 +26,8 @@
 #include "list/Reverse_Iterator.h"
 #include "list/Const_Iterator.h"
 #include "list/Const_Reverse_Iterator.h"
+#include "hash_map/Map_Node.h"
+#include "hash_map/Hash_Map.h"
 
 using namespace std;
 template<typename T>
@@ -55,8 +57,21 @@ int invoke(int x, int y, int (*func)(int, int))
 int main()
 {
 
+	Hash_Map<int> firstMap;
+	firstMap.insert("One",1);
+	firstMap.insert("two", 2);
+	firstMap.insert("tree", 3);
+	firstMap.insert("four", 4);
+	firstMap.print();
 
-	std::string myNum[3] = { "fsd","sadasd","dsad" };
+
+
+
+
+
+
+
+	/*std::string myNum[3] = { "fsd","sadasd","dsad" };
 	int x = 3;
 	List<std::string> list3(myNum, x);
 	list3.Print();
@@ -105,6 +120,6 @@ int main()
 
 	std::cout << endl << "--------------- " << endl;
 	List<int> intListt(intList);
-	intListt.Print();
+	intListt.Print();*/
 	return 0;
 }

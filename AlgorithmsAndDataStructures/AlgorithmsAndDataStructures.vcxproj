@@ -130,19 +130,21 @@
     <ClCompile Include="AlgorithmsAndDataStructures.cpp" />
     <ClCompile Include="list\Const_Iterator.cpp" />
     <ClCompile Include="list\Const_Reverse_Iterator.cpp" />
-    <ClCompile Include="hash_map\hash_map.cpp" />
+    <ClCompile Include="hash_map\Hash_Map.cpp" />
     <ClCompile Include="list\Iterator.cpp" />
     <ClCompile Include="list\Node.cpp" />
     <ClCompile Include="list\Reverse_Iteratorr.cpp" />
+    <ClCompile Include="hash_map\Map_Node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list\Const_Iterator.h" />
     <ClInclude Include="list\Const_Reverse_Iterator.h" />
-    <ClInclude Include="hash_map\hash_map.h" />
+    <ClInclude Include="hash_map\Hash_Map.h" />
     <ClInclude Include="list\Iterator.h" />
     <ClInclude Include="list\List.h" />
     <ClInclude Include="list\Node.h" />
     <ClInclude Include="list\Reverse_Iterator.h" />
+    <ClInclude Include="hash_map\Map_Node.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
