@@ -19,10 +19,13 @@
 #include <list>
 #include <cstdarg>
 
-#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\Node.h"
-#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\List.h"
-#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\Iterator.h"
-#include "\Development\repos\algorithms_and_data_structures\AlgorithmsAndDataStructures\list\Reverse_Iterator.h"
+
+#include "list/Node.h"
+#include "list/List.h"
+#include "list/Iterator.h"
+#include "list/Reverse_Iterator.h"
+#include "list/Const_Iterator.h"
+#include "list/Const_Reverse_Iterator.h"
 
 using namespace std;
 template<typename T>
