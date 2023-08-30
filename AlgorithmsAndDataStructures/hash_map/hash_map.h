@@ -74,7 +74,7 @@ public:
            Map_Node<T>* currBucketHead = temp[i];
            while (currBucketHead != NULL) 
            {
-               this->insert(currBucketHead->get_key(), currBucketHead->get_data()); 
+               this->rehashingInsert(currBucketHead->get_key(), currBucketHead->get_data());
                currBucketHead = currBucketHead->get_next_item();
            }
        }
@@ -84,6 +84,32 @@ public:
 
    bool isEmpty(int bucketIndex) {
        return this->column[bucketIndex] == NULL;
+   }
+
+   void rehashingInsert(string key, T value)
+   {
+       while (this->getLoadFactor() > 0.5f) // factor > 0.5
+       {
+           this->rehashing();
+       }
+
+       int bucketIndex = this->hashFunction(key);
+       if (isEmpty(bucketIndex))
+       {
+           Map_Node<T>* newNode = new Map_Node<T>(key, value);
+           column[bucketIndex] = newNode;
+          
+       }
+       else
+       {
+           Map_Node<T>* tempNode = this->column[bucketIndex];
+           Map_Node<T>* newNode = new Map_Node<T>(key, value);
+           newNode->set_next_item(this->column[bucketIndex]);
+           tempNode->set_previous_item(newNode);
+           this->column[bucketIndex] = newNode;
+           
+       }
+       return;
    }
 
    void insert(string key, T value)
@@ -130,8 +156,8 @@ public:
 
     float getLoadFactor()
     {
-       
-        return (float)(this->elements + 1) / (float)(this->arraySize);
+        float res = (float)(this->elements + 1) / (float)(this->arraySize);
+        return res;
     }
 
 
@@ -145,7 +171,7 @@ public:
 
             while (temp_pointer !=NULL)
             {
-                cout << "-> " << temp_pointer->get_data();
+                cout << "-> " << temp_pointer->get_data()<<" Key: "<<temp_pointer->get_key()<<" ";
 
                 temp_pointer = temp_pointer->get_next_item();
 

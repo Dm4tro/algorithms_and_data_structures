@@ -58,7 +58,7 @@ int main()
 {
 
 	Hash_Map<int> firstMap;
-	firstMap.insert("One",1);
+	firstMap.insert("One", 1);
 	firstMap.insert("two", 2);
 	firstMap.insert("tree", 3);
 	firstMap.insert("four", 4);
