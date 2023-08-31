@@ -15,12 +15,13 @@
 #include <fstream>
 #include <cstdlib> 
 #include <cctype> 
-#include <map>
 #include <stdarg.h>
 #include <list>
 #include <cstdarg>
 
 #include "Map_Node.h"
+#include "Iterator_Map.h"
+
 
 #define ll long long int
 
@@ -105,6 +106,14 @@ public:
        }
 
        return *this;
+   }
+
+   Iterator_Map<T> beginn() {
+       
+       return  Iterator_Map<T>(*this,calculateStart());
+   }
+   Iterator_Map<T> end() {
+       return  Iterator_Map<T>(*this, calculateEnd());
    }
 
    void rehashing()
@@ -279,7 +288,30 @@ public:
     }
 
 
+    Map_Node<T>* calculateStart() {
+        Map_Node<T>* temp = this->column[0];
+        return temp;
+    }
+
+    Map_Node<T>* calculateEnd() {
+        int i = arraySize - 1;
+
+
+        while (isEmpty(i))
+        {
+            --i;
+        }
+        Map_Node<T>* temp = this->column[i];
+        while (temp!=NULL)
+        {
+            temp=temp->get_next_item();
+        }
+        return temp;
+        //column[arraySize-1]
+    }
+
+    
 private:
-	Map_Node<T>** column;
+    Map_Node<T>** column;
 	int arraySize, elements;
 };

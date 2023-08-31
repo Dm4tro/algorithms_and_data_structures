@@ -39,6 +39,9 @@
     <ClCompile Include="hash_map\Map_Node.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="hash_map\Iterator_Map.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list\Node.h">
@@ -63,6 +66,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="hash_map\Map_Node.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="hash_map\Iterator_Map.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
