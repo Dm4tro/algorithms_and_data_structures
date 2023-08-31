@@ -246,6 +246,8 @@ public:
 
         sizeOfList = rhs.sizeOfList;
 
+        FixPrevLink();
+
         return *this;
     }
 

@@ -21,7 +21,9 @@
 #include <cstdarg>
 
 #include "Map_Node.h"
+
 #define ll long long int
+
 using namespace std;
 
 template<typename T>
@@ -57,24 +59,72 @@ public:
   
     }
 
+   Hash_Map(const Hash_Map<T>& rhs ) {
+       Map_Node<T>** temp = this->column;
+       this->arraySize = rhs.arraySize;
+       this->column = new Map_Node<T> *[this->arraySize];
+
+       for (int i = 0; i < this->arraySize; i++)
+       {
+           column[i] = NULL;
+       }
+
+       for (int i = 0; i < arraySize; i++)
+       {
+           Map_Node<T>* currBucketHead = rhs.column[i];
+
+           while (currBucketHead != NULL)
+           {
+               this->insertWithoutChangingElementSize(currBucketHead->get_key(), currBucketHead->get_data());
+               currBucketHead = currBucketHead->get_next_item();
+           }
+       }
+
+   }
+
+   Hash_Map& operator=(const Hash_Map& rhs) {
+
+       Map_Node<T>** temp = this->column;
+       this->arraySize = rhs.arraySize;
+       this->column = new Map_Node<T> *[this->arraySize];
+
+       for (int i = 0; i < this->arraySize; i++) 
+       {
+           column[i] = NULL;
+       }
+
+       for (int i = 0; i < arraySize; i++)
+       {
+           Map_Node<T>* currBucketHead = rhs.column[i];
+
+           while (currBucketHead != NULL)
+           {
+               this->insertWithoutChangingElementSize(currBucketHead->get_key(), currBucketHead->get_data());
+               currBucketHead = currBucketHead->get_next_item();
+           }
+       }
+
+       return *this;
+   }
+
    void rehashing()
    {
-       int oldCapacity = this->arraySize;
+       int oldArraySize = this->arraySize;
        Map_Node<T>** temp = this->column; 
 
-       this->arraySize = oldCapacity * 2; 
+       this->arraySize = oldArraySize * 2; 
        this->column = new Map_Node<T> *[this->arraySize]; 
 
        for (int i = 0; i < this->arraySize; i++)
        {
            column[i] = NULL;
        }
-       for (int i = 0; i < oldCapacity; i++) 
+       for (int i = 0; i < oldArraySize; i++) 
        {
            Map_Node<T>* currBucketHead = temp[i];
            while (currBucketHead != NULL) 
            {
-               this->rehashingInsert(currBucketHead->get_key(), currBucketHead->get_data());
+               this->insertWithoutChangingElementSize(currBucketHead->get_key(), currBucketHead->get_data());
                currBucketHead = currBucketHead->get_next_item();
            }
        }
@@ -86,7 +136,7 @@ public:
        return this->column[bucketIndex] == NULL;
    }
 
-   void rehashingInsert(string key, T value)
+   void insertWithoutChangingElementSize(string key, T value)
    {
        while (this->getLoadFactor() > 0.5f) // factor > 0.5
        {
@@ -125,6 +175,7 @@ public:
            Map_Node<T>* newNode = new Map_Node<T>(key, value);
            column[bucketIndex] = newNode;
            this->elements++;
+           newNode->set_previous_item(NULL);
        }
        else 
        {
@@ -149,8 +200,8 @@ public:
            sum = ((sum % this->arraySize) + ((int(key[i])) * factor) % this->arraySize) % this->arraySize;
            factor = ((factor % INT16_MAX) * (31 % INT16_MAX)) % INT16_MAX;
        }
-
-       bucketIndex = sum;
+       bucketIndex = static_cast<int> (sum);
+       
        return bucketIndex;
    }
 
@@ -179,6 +230,52 @@ public:
 
             cout<<"-> NULL" << endl;
         }
+    }
+
+
+    void deleteByKey(string targetKey) {
+
+
+        for (size_t i = 0; i < arraySize; i++)
+        {
+            Map_Node<T>* temp_pointer = this->column[i];
+            
+            while (temp_pointer != NULL)
+            {
+
+                if (temp_pointer->get_key()==targetKey)
+                {
+
+                    if (temp_pointer->get_previous_item()==NULL)
+                    {
+                        
+                        if (temp_pointer->get_next_item()==NULL)
+                        {
+                            this->column[i] = NULL;
+                        }
+                        else {
+                            temp_pointer->get_next_item()->set_previous_item(NULL);
+                            this->column[i] = temp_pointer->get_next_item();
+                        }
+                        
+                    }
+                    else {
+                        temp_pointer->get_previous_item()->set_next_item(temp_pointer->get_next_item());
+
+                    }
+
+                    delete  temp_pointer;
+                    return;
+                }
+
+                temp_pointer = temp_pointer->get_next_item();
+            }
+
+
+        }
+
+        cout << "Key not found!";
+
     }
 
 

@@ -60,17 +60,26 @@ int main()
 	Hash_Map<int> firstMap;
 	firstMap.insert("One", 1);
 	firstMap.insert("two", 2);
-	firstMap.insert("tree", 3);
+	firstMap.insert("three", 3);
 	firstMap.insert("four", 4);
+	firstMap.insert("ten", 10);
 	firstMap.print();
-
-
-
-
-
-
-
-
+	firstMap.deleteByKey("One");
+	std::cout << "--------------- " << endl;
+	firstMap.print();
+	std::cout << "--------------- " << endl;
+	firstMap.deleteByKey("four");
+	firstMap.print();
+	std::cout << "Test--------------- " << endl;
+	Hash_Map<int> secMap(firstMap);
+	
+	secMap.print();
+	std::cout << "Test--------------- " << endl;
+	Hash_Map<int> irstMap;
+	irstMap.insert("One", 1);
+	irstMap.insert("two", 2);
+	irstMap = secMap;
+	irstMap.print();
 	/*std::string myNum[3] = { "fsd","sadasd","dsad" };
 	int x = 3;
 	List<std::string> list3(myNum, x);

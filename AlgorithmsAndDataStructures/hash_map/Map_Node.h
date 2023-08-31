@@ -31,8 +31,8 @@ public:
 
 	Map_Node() {
 
+		this->previous_item = NULL;
 		this->next_item = NULL;
-
 	}
 
 	Map_Node(string& key, T& data) {
@@ -44,18 +44,18 @@ public:
 
 	}
 
-	/*~Map_Node() 
-	{
-		Map_Node<T>* head = this;
-		
+	//~Map_Node() 
+	//{
+	//	Map_Node<T>* head = this;
+	//	
 
-		while (head != NULL)
-		{
-			Map_Node<T>* currNode  = head;
-			head = head->next_item;
-			delete currNode;
-		}
-	}*/
+	//	while (head != NULL)
+	//	{
+	//		Map_Node<T>* currNode  = head;
+	//		head = head->next_item;
+	//		delete currNode;
+	//	}
+	//}
 
 	Map_Node<T>* get_next_item() {
 		return next_item;
