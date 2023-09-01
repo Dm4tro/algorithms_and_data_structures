@@ -46,6 +46,8 @@ public:
 
 	Iterator_Map(Hash_Map<T>& map_ ,Map_Node<T>* node_ptr) : hash_map(map_) {
 		current_item = node_ptr;
+
+
 	}
 
 	Iterator_Map(const Iterator_Map& iter) {
@@ -79,7 +81,9 @@ public:
 
 		if (current_item->get_next_item() == NULL)
 		{
-			while (current_item->get_next_item() == NULL)
+			current_item = current_item->get_next_item();
+
+			while (current_item == NULL)
 			{
 				++index;
 				current_item = hash_map.column[index];
