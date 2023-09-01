@@ -80,6 +80,13 @@ int main()
 	irstMap.insert("two", 2);
 	irstMap = secMap;
 	irstMap.print();
+	std::cout << "Test--------------- " << endl;
+	for (Iterator_Map<int> iter = firstMap.begiN();
+		iter != firstMap.enD();
+		iter++)
+	{
+		std::cout << "f: " << *iter << " ";
+	}
 	/*std::string myNum[3] = { "fsd","sadasd","dsad" };
 	int x = 3;
 	List<std::string> list3(myNum, x);

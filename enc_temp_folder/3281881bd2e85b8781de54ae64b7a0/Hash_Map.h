@@ -322,7 +322,6 @@ public:
             temp = NULL;
             return temp;
         }
-
         while (temp->get_next_item() != NULL)
         {
             temp=temp->get_next_item();

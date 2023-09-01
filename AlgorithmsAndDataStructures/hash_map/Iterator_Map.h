@@ -92,7 +92,7 @@ public:
 		{
 			current_item = current_item->get_next_item();
 		}
-		return Iterator_Map(temp);
+		return Iterator_Map(hash_map, temp);
 	}
 
 
@@ -102,10 +102,12 @@ public:
 		return Iterator_Map(temp);
 
 	}
+
 	Iterator_Map& operator-- () {
 		current_item = current_item->get_previous_item();
 		return *this;
 	}
+
 	bool operator== (const Iterator_Map& other) const {
 		return current_item == other.current_item;
 	}
@@ -119,7 +121,6 @@ public:
 
 
 	T* operator->() { return &(current_item->get_data()); }
-
 
 };
 
