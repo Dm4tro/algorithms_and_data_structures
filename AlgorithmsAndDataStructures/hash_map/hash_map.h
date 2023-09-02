@@ -93,7 +93,7 @@ public:
 
    Iterator_Map<T> begiN() {
 
-       return  Iterator_Map<T>(*this, calculateStart());
+       return  Iterator_Map<T>(*this, calculateStart(),startIndex);
    }
    Iterator_Map<T> enD() {
        return  Iterator_Map<T>(*this, calculateEnd());
@@ -302,38 +302,41 @@ public:
   
 
     Map_Node<T>* calculateStart() {
-        Map_Node<T>* temp = this->column[0];
-        return temp;
-    }
-
-    Map_Node<T>* calculateEnd() {
-        int i = arraySize - 1;
+        int startIndex = 0;
 
 
-        while (isEmpty(i))
+        while (isEmpty(startIndex))
         {
-            --i;
+            ++startIndex;
         }
 
-      
 
-        Map_Node<T>* temp = this->column[i];
-        if (i < 0) {
+
+        Map_Node<T>* temp = this->column[startIndex];
+        if (startIndex < arraySize+1 ) {
             temp = NULL;
             return temp;
         }
 
-        while (temp->get_next_item() != NULL)
+
+        /*while (temp->get_next_item() != NULL)
         {
-            temp=temp->get_next_item();
-        }
+            temp = temp->get_next_item();
+        }*/
 
 
         return temp;
+    }
+
+    Map_Node<T>* calculateEnd() {
+
         //column[arraySize-1]
+        Map_Node<T>* temp = this->column[endIndex];
+        return temp;
     }
 
     Map_Node<T>** column;
 private:   
 	int arraySize, elements;
+    int endIndex= arraySize + 1, startIndex;
 };

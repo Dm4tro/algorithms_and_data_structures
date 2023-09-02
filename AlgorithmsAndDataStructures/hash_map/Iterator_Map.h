@@ -37,16 +37,24 @@ class Iterator_Map
 {
 private:
 	Map_Node<T>* current_item;
-	int index = 0;
+	int index;
 	Hash_Map<T>& hash_map;
 public:
 	Iterator_Map() {
 
 	}
 
-	Iterator_Map(Hash_Map<T>& map_ ,Map_Node<T>* node_ptr) : hash_map(map_) {
+	Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr, int ind) : hash_map(map_), ind(index) {
+		
+
 		current_item = node_ptr;
 
+	}
+
+	Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr) : hash_map(map_) {
+
+
+		current_item = node_ptr;
 
 	}
 
@@ -59,7 +67,7 @@ public:
 		/*current_item = current_item->get_next_item();*/
 		if (current_item->get_next_item()==NULL)
 		{
-			while (current_item->get_next_item() == NULL)
+			while (current_item == NULL)
 			{
 				++index;
 				current_item = hash_map.column[index];
