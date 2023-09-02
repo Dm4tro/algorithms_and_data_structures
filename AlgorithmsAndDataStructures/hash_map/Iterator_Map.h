@@ -44,7 +44,7 @@ public:
 
 	}
 
-	Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr, int ind) : hash_map(map_), ind(index) {
+	Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr, int ind) : hash_map(map_), index(ind) {
 		
 
 		current_item = node_ptr;
@@ -83,6 +83,7 @@ public:
 
 		return *this;
 	}
+
 
 	Iterator_Map operator++ (int) {
 		Map_Node<T>* temp = current_item;

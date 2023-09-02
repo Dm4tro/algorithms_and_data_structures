@@ -91,14 +91,37 @@ public:
 
    }
 
-   Iterator_Map<T> begiN() {
+   friend ostream& operator<<(ostream& os, const Hash_Map<T>& rhs)
+   {
 
-       return  Iterator_Map<T>(*this, calculateStart(),startIndex);
+       for (int i = 0; i < rhs.arraySize; ++i)
+       {
+           Map_Node<T>* temp_pointer = rhs.column[i];
+           os << i << " Row:";
+
+           while (temp_pointer != NULL)
+           {
+               os << "-> " << temp_pointer->get_data() << " Key: " << temp_pointer->get_key() << " ";
+
+               temp_pointer = temp_pointer->get_next_item();
+
+           }
+
+           os << "-> NULL" << endl;
+       }
+       return os;
    }
-   Iterator_Map<T> enD() {
-       return  Iterator_Map<T>(*this, calculateEnd());
+
+   friend istream& operator>>(istream& is, Hash_Map<T>& rhs)
+   {
+       string  keyWord;
+       T value;
+       is >> keyWord >> value;
+
+       rhs.insert(keyWord, value);
+
+       return is;
    }
-  
 
    Hash_Map& operator=(const Hash_Map& rhs) {
 
@@ -106,7 +129,7 @@ public:
        this->arraySize = rhs.arraySize;
        this->column = new Map_Node<T> *[this->arraySize];
 
-       for (int i = 0; i < this->arraySize; i++) 
+       for (int i = 0; i < this->arraySize; i++)
        {
            column[i] = NULL;
        }
@@ -125,6 +148,16 @@ public:
        return *this;
    }
 
+   Iterator_Map<T> begiN() {
+
+       return  Iterator_Map<T>(*this, calculateStart(),startIndex);
+   }
+   Iterator_Map<T> enD() {
+       return  Iterator_Map<T>(*this, calculateEnd());
+   }
+  
+
+  
   
 
    void rehashing()
@@ -286,6 +319,7 @@ public:
                     }
 
                     delete  temp_pointer;
+                    this->elements--;
                     return;
                 }
 
