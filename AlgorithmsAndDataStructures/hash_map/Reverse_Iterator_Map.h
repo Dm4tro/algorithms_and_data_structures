@@ -33,100 +33,113 @@ using namespace std;
 
 template<typename T>
 
-class Iterator_Map
+class Reverse_Iterator_Map
 {
 private:
 	Map_Node<T>* current_item;
 	int index;
 	Hash_Map<T>& hash_map;
 public:
-	Iterator_Map() {
+	Reverse_Iterator_Map() {
 
 	}
 
-	Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr, int ind) : hash_map(map_), index(ind) {
-		
-
-		current_item = node_ptr;
-
-	}
-
-	Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr) : hash_map(map_) {
+	Reverse_Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr, int ind) : hash_map(map_), index(ind) {
 
 
 		current_item = node_ptr;
 
 	}
 
-	Iterator_Map(const Iterator_Map& iter) {
+	Reverse_Iterator_Map (Hash_Map<T>& map_, Map_Node<T>* node_ptr) : hash_map(map_) {
+
+
+		current_item = node_ptr;
+
+	}
+
+	Reverse_Iterator_Map(const Reverse_Iterator_Map& iter) {
 		current_item = iter.current_item;
 	}
 
 
-	Iterator_Map& operator++() {
+	Reverse_Iterator_Map & operator++() {
 		/*current_item = current_item->get_next_item();*/
-		if (current_item->get_next_item()==NULL)
+		if (current_item->get_previous_item() == NULL)
 		{
-			current_item = current_item->get_next_item();
 			while (current_item == NULL)
 			{
-				++index;
+				--index;
 				current_item = hash_map.column[index];
-				
+
 			}
 
-			
+			if (current_item->get_next_item()!=NULL)
+			{
+				while(current_item->get_next_item() != NULL){
+					current_item = current_item->get_next_item();
+				}
+			}
+
+
 		}
 		else
 		{
-			current_item = current_item->get_next_item();
+			current_item = current_item->get_previous_item();
 		}
 
 		return *this;
 	}
 
 
-	Iterator_Map operator++ (int) {
+	Reverse_Iterator_Map operator++ (int) {
 		Map_Node<T>* temp = current_item;
 
-		if (current_item->get_next_item() == NULL)
+		if (current_item->get_previous_item() == NULL)
 		{
-			current_item = current_item->get_next_item();
-
+			current_item = current_item->get_previous_item();
 			while (current_item == NULL)
 			{
-				++index;
+				--index;
 				current_item = hash_map.column[index];
 
 			}
 
-			
+			if (current_item->get_next_item() != NULL)
+			{
+				while (current_item->get_next_item() != NULL) {
+					current_item = current_item->get_next_item();
+				}
+			}
+
+
 		}
 		else
 		{
-			current_item = current_item->get_next_item();
+			current_item = current_item->get_previous_item();
 		}
-		return Iterator_Map(hash_map, temp);
+
+		return Reverse_Iterator_Map(hash_map, temp);
 	}
 
 
-	Iterator_Map operator-- (int) {
+	Reverse_Iterator_Map operator-- (int) {
 		Map_Node<T>* temp = current_item;
 		current_item = current_item->get_previous_item();
-		return Iterator_Map(temp);
+		return ReverseIterator_Map(hash_map, temp);
 
 	}
 
-	Iterator_Map& operator-- () {
+	Reverse_Iterator_Map& operator-- () {
 		current_item = current_item->get_previous_item();
 		return *this;
 	}
 
-	bool operator== (const Iterator_Map& other) const {
+	bool operator== (const Reverse_Iterator_Map& other) const {
 		return current_item == other.current_item;
 	}
 
-	bool operator!= (const Iterator_Map& other) const {
+	bool operator!= (const Reverse_Iterator_Map& other) const {
 		return !(*this == other);
 	}
 

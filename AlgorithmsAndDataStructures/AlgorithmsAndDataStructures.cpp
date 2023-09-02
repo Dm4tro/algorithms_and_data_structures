@@ -28,7 +28,8 @@
 #include "list/Const_Reverse_Iterator.h"
 #include "hash_map/Map_Node.h"
 #include "hash_map/Hash_Map.h"
-
+//#include "hash_map/Reverse_Iterator_Map.h"
+#include "hash_map/Reverse_Iterator_Map.h"
 using namespace std;
 template<typename T>
 
@@ -74,26 +75,33 @@ int main()
 	Hash_Map<int> secMap(firstMap);
 	
 	secMap.print();
-	std::cout << "Test--------------- " << endl;
+	std::cout << "Test---------------x " << endl;
 	Hash_Map<int> irstMap;
 	irstMap.insert("One", 1);
 	irstMap.insert("two", 2);
+	
 	irstMap = secMap;
 	irstMap.print();
 	
 
-	std::cout << "Test---------------x " << endl;
+	/*std::cout << "Test---------------y " << endl;
 	cin >> irstMap;
-	cout << irstMap;
-	/*for (Iterator_Map<int> iter = firstMap.begiN();
-		iter != firstMap.enD();
+	cout << irstMap;*/
+	std::cout << "Test---------------z " << endl;
+
+	for (Iterator_Map<int> it = irstMap.begiN();
+		it != irstMap.enD();
+		it++)
+	{
+		std::cout << "f: " << *it << " ";
+	}
+	cout << "Test---------------y " << endl;
+	for (Reverse_Iterator_Map<int> iter = irstMap.rbegiN();
+		iter != irstMap.renD();
 		iter++)
 	{
 		std::cout << "f: " << *iter << " ";
 	}
-*/
-
-	
 
 	/*std::string myNum[3] = { "fsd","sadasd","dsad" };
 	int x = 3;

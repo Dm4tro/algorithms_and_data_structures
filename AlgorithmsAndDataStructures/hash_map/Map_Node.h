@@ -106,7 +106,7 @@ public:
 	const string& get_key() const {
 		return key;
 	}
-
+	
 	void set_key() {
 		this->key = key;
 	}

@@ -22,17 +22,22 @@
 
 #include "Map_Node.h"
 #include "Iterator_Map.h"
-
+#include "Reverse_Iterator_Map.h"
 
 #define ll long long int
 
 using namespace std;
 
 template<typename T>
+class Map_Node;
+
+template<typename T>
 class Iterator_Map;
 
 template<typename T>
-class Map_Node;
+class Reverse_Iterator_Map;
+
+
 
 template<typename T>
 
@@ -42,9 +47,17 @@ public:
     Hash_Map() {
         this->arraySize = 5;
         this->elements = 0;
-        this->column = new Map_Node<T> *[this->arraySize];
-        
-        for (int i = 0; i < this->arraySize; i++)
+        this->column = new Map_Node<T> *[this->arraySize+2];
+        string key1 = "Startkey";
+        T data1 = 1;
+        Map_Node<T>* newNode1 = new Map_Node<T>(key1, data1);
+        string key2 = "Endkey";
+        T data2 = 9;
+        Map_Node<T>* newNode2 = new Map_Node<T>(key2, data2);
+
+        column[0] = newNode1;
+        column[arraySize +1] = newNode2;
+        for (int i = 1; i < this->arraySize+1; i++)
         {
             column[i] = NULL;
         }
@@ -53,7 +66,7 @@ public:
    ~Hash_Map() {
        
          
-           for (int i = 0; i < this->arraySize; ++i) {
+           for (int i = 0; i < this->arraySize+2; ++i) {
                Map_Node<T>* front = column[i];
                while (front != NULL) {
                    Map_Node<T>* prev = front;
@@ -70,14 +83,22 @@ public:
    Hash_Map(const Hash_Map<T>& rhs ) {
        Map_Node<T>** temp = this->column;
        this->arraySize = rhs.arraySize;
-       this->column = new Map_Node<T> *[this->arraySize];
-
-       for (int i = 0; i < this->arraySize; i++)
+       this->column = new Map_Node<T> *[this->arraySize+2];
+       string key1 = "Startkey";
+       T data1 = 1;
+       Map_Node<T>* newNode1 = new Map_Node<T>(key1, data1);
+       string key2 = "Endkey";
+       T data2 = 9;
+       Map_Node<T>* newNode2 = new Map_Node<T>(key2, data2);
+       
+       column[0] = newNode1;
+       column[arraySize + 1] = newNode2;
+       for (int i = 1; i < this->arraySize+1; i++)
        {
            column[i] = NULL;
        }
 
-       for (int i = 0; i < arraySize; i++)
+       for (int i = 1; i < arraySize+1; i++)
        {
            Map_Node<T>* currBucketHead = rhs.column[i];
 
@@ -94,7 +115,7 @@ public:
    friend ostream& operator<<(ostream& os, const Hash_Map<T>& rhs)
    {
 
-       for (int i = 0; i < rhs.arraySize; ++i)
+       for (int i = 1; i < rhs.arraySize+1; ++i)
        {
            Map_Node<T>* temp_pointer = rhs.column[i];
            os << i << " Row:";
@@ -127,14 +148,23 @@ public:
 
        Map_Node<T>** temp = this->column;
        this->arraySize = rhs.arraySize;
-       this->column = new Map_Node<T> *[this->arraySize];
+       this->column = new Map_Node<T> *[this->arraySize+2];
 
-       for (int i = 0; i < this->arraySize; i++)
+       string key1 = "Startkey";
+       T data1 = 1;
+       Map_Node<T>* newNode1 = new Map_Node<T>(key1, data1);
+       string key2 = "Endkey";
+       T data2 = 9;
+       Map_Node<T>* newNode2 = new Map_Node<T>(key2, data2);
+
+       column[0] = newNode1;
+       column[arraySize + 1] = newNode2;
+       for (int i = 1; i < this->arraySize+1; i++)
        {
            column[i] = NULL;
        }
 
-       for (int i = 0; i < arraySize; i++)
+       for (int i = 1; i < arraySize+1; i++)
        {
            Map_Node<T>* currBucketHead = rhs.column[i];
 
@@ -156,6 +186,14 @@ public:
        return  Iterator_Map<T>(*this, calculateEnd());
    }
   
+   Reverse_Iterator_Map<T> rbegiN() {
+
+       return  Reverse_Iterator_Map<T>(*this, calculateRStart(), rStartIndex);
+   }
+   Reverse_Iterator_Map<T> renD() {
+       return  Reverse_Iterator_Map<T>(*this, calculateREnd());
+   }
+
 
   
   
@@ -166,13 +204,25 @@ public:
        Map_Node<T>** temp = this->column; 
 
        this->arraySize = oldArraySize * 2; 
-       this->column = new Map_Node<T> *[this->arraySize]; 
+       this->column = new Map_Node<T> *[this->arraySize+2]; 
 
-       for (int i = 0; i < this->arraySize; i++)
+       
+       for (int i = 1; i < this->arraySize+1; i++)
        {
            column[i] = NULL;
        }
-       for (int i = 0; i < oldArraySize; i++) 
+
+       string key1 = "Startkey";
+       T data1 = 1;
+       Map_Node<T>* newNode1 = new Map_Node<T>(key1, data1);
+       string key2 = "Endkey";
+       T data2 = 9;
+       Map_Node<T>* newNode2 = new Map_Node<T>(key2, data2);
+
+       column[0] = newNode1;
+       column[arraySize + 1] = newNode2;
+
+       for (int i = 1; i < oldArraySize+1; i++) 
        {
            Map_Node<T>* currBucketHead = temp[i];
            while (currBucketHead != NULL) 
@@ -254,8 +304,11 @@ public:
            sum = ((sum % this->arraySize) + ((int(key[i])) * factor) % this->arraySize) % this->arraySize;
            factor = ((factor % INT16_MAX) * (31 % INT16_MAX)) % INT16_MAX;
        }
-       bucketIndex = static_cast<int> (sum);
+       bucketIndex = static_cast<int> (sum)+1;
        
+      
+
+
        return bucketIndex;
    }
 
@@ -269,7 +322,7 @@ public:
     void print() {
 
 
-        for (int i = 0; i < arraySize; ++i)
+        for (int i = 1; i < arraySize+1; ++i)
         {
             Map_Node<T>* temp_pointer = this->column[i];
             cout << i << " Row:";
@@ -290,7 +343,7 @@ public:
     void deleteByKey(string targetKey) {
 
 
-        for (size_t i = 0; i < arraySize; i++)
+        for (size_t i = 1; i < arraySize+1; i++)
         {
             Map_Node<T>* temp_pointer = this->column[i];
             
@@ -336,18 +389,18 @@ public:
   
 
     Map_Node<T>* calculateStart() {
-        int startIndex = 0;
+        this->startIndex = 1;
 
 
         while (isEmpty(startIndex))
         {
-            ++startIndex;
+            startIndex++;
         }
 
 
 
         Map_Node<T>* temp = this->column[startIndex];
-        if (startIndex < arraySize+1 ) {
+        if (startIndex >= arraySize+2 ) {
             temp = NULL;
             return temp;
         }
@@ -365,12 +418,43 @@ public:
     Map_Node<T>* calculateEnd() {
 
         //column[arraySize-1]
-        Map_Node<T>* temp = this->column[endIndex];
+        Map_Node<T>* temp = this->column[arraySize + 1];
         return temp;
     }
+
+    Map_Node<T>* calculateRStart() {
+        this->rStartIndex = this->arraySize;
+
+
+        while (isEmpty(rStartIndex))
+        {
+            rStartIndex--;
+        }
+        Map_Node<T>* temp = this->column[rStartIndex];
+        if (rStartIndex <= 0) {
+            temp = NULL;
+            return temp;
+        }
+
+        if (temp->get_next_item() != NULL) {
+            while (temp->get_next_item() != NULL)
+            {
+                temp = temp->get_next_item();
+            }
+
+        }
+
+        return temp;
+    }
+
+    Map_Node<T>* calculateREnd() {
+        Map_Node<T>* temp = this->column[0];
+        return temp;
+    }
+
 
     Map_Node<T>** column;
 private:   
 	int arraySize, elements;
-    int endIndex= arraySize + 1, startIndex;
+    int  startIndex,rStartIndex;
 };
