@@ -23,6 +23,8 @@
 #include "Map_Node.h"
 #include "Iterator_Map.h"
 #include "Reverse_Iterator_Map.h"
+#include "Const_Iterator_Map.h"
+#include "Const_Reverse_Iterator_Map.h"
 
 #define ll long long int
 
@@ -32,11 +34,16 @@ template<typename T>
 class Map_Node;
 
 template<typename T>
+class Const_Iterator_Map;
+
+template<typename T>
 class Iterator_Map;
 
 template<typename T>
-class Reverse_Iterator_Map;
+class Const_Reverse_Iterator_Map;
 
+template<typename T>
+class Reverse_Iterator_Map;
 
 
 template<typename T>
@@ -194,8 +201,22 @@ public:
        return  Reverse_Iterator_Map<T>(*this, calculateREnd());
    }
 
+   Const_Iterator_Map<T> cbegiN() {
 
-  
+       return  Const_Iterator_Map<T>(*this, calculateStart(), startIndex);
+   }
+   Const_Iterator_Map<T> cenD() {
+       return  Const_Iterator_Map<T>(*this, calculateEnd());
+   }
+
+   Const_Reverse_Iterator_Map<T> crbegiN() {
+
+       return  Const_Reverse_Iterator_Map<T>(*this, calculateRStart(), rStartIndex);
+   }
+   Const_Reverse_Iterator_Map<T> crenD() {
+       return  Const_Reverse_Iterator_Map<T>(*this, calculateREnd());
+   }
+
   
 
    void rehashing()

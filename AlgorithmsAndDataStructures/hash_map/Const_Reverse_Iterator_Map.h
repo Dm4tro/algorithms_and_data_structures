@@ -33,37 +33,37 @@ using namespace std;
 
 template<typename T>
 
-class Reverse_Iterator_Map
+class Const_Reverse_Iterator_Map
 {
 private:
 	Map_Node<T>* current_item;
 	int index;
 	Hash_Map<T>& hash_map;
 public:
-	Reverse_Iterator_Map() {
+	Const_Reverse_Iterator_Map() {
 
 	}
 
-	Reverse_Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr, int ind) : hash_map(map_), index(ind) {
+	Const_Reverse_Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr, int ind) : hash_map(map_), index(ind) {
 
 
 		current_item = node_ptr;
 
 	}
 
-	Reverse_Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr) : hash_map(map_) {
+	Const_Reverse_Iterator_Map(Hash_Map<T>& map_, Map_Node<T>* node_ptr) : hash_map(map_) {
 
 
 		current_item = node_ptr;
 
 	}
 
-	Reverse_Iterator_Map(const Reverse_Iterator_Map& iter) {
+	Const_Reverse_Iterator_Map(const Const_Reverse_Iterator_Map& iter) {
 		current_item = iter.current_item;
 	}
 
 
-	Reverse_Iterator_Map& operator++() {
+	Const_Reverse_Iterator_Map& operator++() {
 		/*current_item = current_item->get_next_item();*/
 		if (current_item->get_previous_item() == NULL)
 		{
@@ -74,9 +74,9 @@ public:
 
 			}
 
-			if (current_item->get_next_item()!=NULL)
+			if (current_item->get_next_item() != NULL)
 			{
-				while(current_item->get_next_item() != NULL){
+				while (current_item->get_next_item() != NULL) {
 					current_item = current_item->get_next_item();
 				}
 			}
@@ -92,7 +92,7 @@ public:
 	}
 
 
-	Reverse_Iterator_Map operator++ (int) {
+	Const_Reverse_Iterator_Map operator++ (int) {
 		Map_Node<T>* temp = current_item;
 
 		if (current_item->get_previous_item() == NULL)
@@ -118,35 +118,35 @@ public:
 			current_item = current_item->get_previous_item();
 		}
 
-		return Reverse_Iterator_Map(hash_map, temp);
+		return Const_Reverse_Iterator_Map(hash_map, temp);
 	}
 
 
-	Reverse_Iterator_Map operator-- (int) {
+	Const_Reverse_Iterator_Map operator-- (int) {
 		Map_Node<T>* temp = current_item;
 		current_item = current_item->get_previous_item();
 		return ReverseIterator_Map(hash_map, temp);
 
 	}
 
-	Reverse_Iterator_Map& operator-- () {
+	Const_Reverse_Iterator_Map& operator-- () {
 		current_item = current_item->get_previous_item();
 		return *this;
 	}
 
-	bool operator== (const Reverse_Iterator_Map& other) const {
+	bool operator== (const Const_Reverse_Iterator_Map& other) const {
 		return current_item == other.current_item;
 	}
 
-	bool operator!= (const Reverse_Iterator_Map& other) const {
+	bool operator!= (const Const_Reverse_Iterator_Map& other) const {
 		return !(*this == other);
 	}
 
+	
 	const T& operator*() const { return current_item->get_data(); }
-	T& operator*() { return current_item->get_data(); }
+	
 
-
-	T* operator->() { return &(current_item->get_data()); }
+	const T* operator->() const { return &(current_item->get_data()); }
 
 };
 

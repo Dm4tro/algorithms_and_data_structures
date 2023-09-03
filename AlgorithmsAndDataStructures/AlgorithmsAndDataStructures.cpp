@@ -29,8 +29,9 @@
 #include "hash_map/Map_Node.h"
 #include "hash_map/Hash_Map.h"
 //#include "hash_map/Reverse_Iterator_Map.h"
-#include "hash_map/Reverse_Iterator_Map.h"
+
 using namespace std;
+
 template<typename T>
 
 
@@ -84,9 +85,10 @@ int main()
 	irstMap.print();
 	
 
-	/*std::cout << "Test---------------y " << endl;
+	std::cout << "Test---------------y " << endl;
 	cin >> irstMap;
-	cout << irstMap;*/
+	cout << irstMap;
+
 	std::cout << "Test---------------z " << endl;
 
 	for (Iterator_Map<int> it = irstMap.begiN();
@@ -96,6 +98,7 @@ int main()
 		std::cout << "f: " << *it << " ";
 	}
 	cout << "Test---------------y " << endl;
+
 	for (Reverse_Iterator_Map<int> iter = irstMap.rbegiN();
 		iter != irstMap.renD();
 		iter++)

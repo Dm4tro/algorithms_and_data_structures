@@ -128,6 +128,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AlgorithmsAndDataStructures.cpp" />
+    <ClCompile Include="hash_map\Const_Reverse_Iterator_Map.cpp" />
+    <ClCompile Include="hash_map\Const_Iterator_Map.cpp" />
     <ClCompile Include="hash_map\Iterator_Map.cpp" />
     <ClCompile Include="list\Const_Iterator.cpp" />
     <ClCompile Include="list\Const_Reverse_Iterator.cpp" />
@@ -139,6 +141,8 @@
     <ClCompile Include="hash_map\Reverse_Iterator_Map.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="hash_map\Const_Reverse_Iterator_Map.h" />
+    <ClInclude Include="hash_map\Const_Iterator_Map.h" />
     <ClInclude Include="hash_map\Iterator_Map.h" />
     <ClInclude Include="list\Const_Iterator.h" />
     <ClInclude Include="list\Const_Reverse_Iterator.h" />
